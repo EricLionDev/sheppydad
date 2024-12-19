@@ -13,6 +13,7 @@ function MontyCard() {
       title: 'Twitter',
       link: 'https://x.com/royouad',
       icon: '../src/assets/twitter.svg',
+      warning: '(fuck elon musk)',
     },
     {
       title: 'Bluesky',
@@ -36,20 +37,27 @@ function MontyCard() {
     },
   ];
 
-  function SocialMediaItem({ title, link, icon }) {
+  function SocialMediaItem({ title, link, icon, warning }) {
     return (
-      <a
-        href={link}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="flex space-x-2 hover:text-blue-500 transition-colors"
-      >
-        <img
-          src={icon}
-          alt={`${title} icon`}
-          className="w-8 h-8 md:w-12 md:h-12 lg:h-16 lg:w-16 object-contain"
-        />
-      </a>
+      <div className="relative flex flex-col items-center">
+        <a
+          href={link}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex space-x-2 hover:text-blue-500 transition-colors"
+        >
+          <img
+            src={icon}
+            alt={`${title} icon`}
+            className="w-8 h-8 md:w-12 md:h-12 lg:h-16 lg:w-16 object-contain"
+          />
+        </a>
+        {warning && (
+          <p className="hidden md:block lg:top-14 absolute top-10 whitespace-nowrap text-xs text-red-500 mt-2">
+            {warning}
+          </p>
+        )}
+      </div>
     );
   }
 
@@ -69,6 +77,7 @@ function MontyCard() {
             title={social.title}
             link={social.link}
             icon={social.icon}
+            warning={social.warning}
           />
         ))}
       </div>
